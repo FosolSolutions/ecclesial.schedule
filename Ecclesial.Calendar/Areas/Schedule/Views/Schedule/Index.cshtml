@@ -1,0 +1,149 @@
+﻿@model Ecclesial.Calendar.DAL.Calendar
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@section head {
+    <link href="~/Content/css/local/schedule.css" rel="stylesheet" />
+    <script id="t-schedule" type="text/x-handlebars-template">
+        <div class="schedule">
+            <table>
+                <thead>
+                    <tr>
+                        <td colspan="2">Date</td>
+                        {{#each months.0.weeks.0.events}}
+                        {{#each tasks}}
+                        <td>{{name}}</td>
+                        {{#if tags}}
+                        <td>
+                            {{#each tags}}
+                            <span>{{id}}</span>
+                            {{/each}}
+                        </td>
+                        {{/if}}
+                        {{/each}}
+                        {{/each}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each months}}
+                        {{#each weeks}}
+                        <tr class="schedule-week {{#odd @@index}}row-odd{{else}}row-even{{/odd}}">
+                            {{#equals @@index 0}}
+                            <td rowspan="{{../weeks.length}}" class="schedule-month"><div>{{../name}}</div></td>
+                            {{/equals}}
+                            <td>{{day}}</td>
+                            {{#each events}}
+                                {{#each tasks}}
+                                    <td data-event-id="{{../id}}" data-task-id="{{id}}">
+                                    {{#if participants}}
+                                        {{#each participants}}
+                                            {{#isParticipant id}}
+                                            <button name="task-decline" data-event-id="{{../../id}}" data-task-id="{{../id}}" data-participant-id="{{id}}">{{> participantName .}}</button>
+                                            {{else}}
+                                            <div class="participant">{{> participantName .}}</div>
+                                            {{/isParticipant}}
+                                        {{/each}}
+                                        {{#multiParticipants .}}
+                                            <button name="task-accept" data-event-id="{{../../id}}" data-task-id="{{../id}}">select</button>
+                                        {{/multiParticipants}}
+                                    {{else}}
+                                        {{#isAllowed .}}
+                                            {{#loop maxParticipants}}
+                                            <button name="task-accept" data-event-id="{{../../id}}" data-task-id="{{../id}}">select</button>
+                                            {{/loop}}
+                                        {{/isAllowed}}
+                                    {{/if}}
+                                    </td>
+                                    {{#if tags}}
+                                    {{> taskTags .}}
+                                    {{/if}}
+                                {{/each}}
+                            {{/each}}
+                        </tr>
+                        {{/each}}
+                    {{/each}}
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </script>
+
+    <script id="t-task-tags" type="text/x-handlebars-template">
+        <td name="tags" data-task-id="{{id}}">
+            {{#isAllowed .}}
+                {{#isParticipant participants}}
+                    {{#each tags}}
+                    <input name="task-tag" data-event-id="{{../../id}}" data-task-id="{{../id}}" data-tag-id="{{id}}" data-tag-rv="{{rowVersion}}" type="text" class="ui-button ui-text ui-corner-all ui-widget" value="{{value}}" />
+                    {{/each}}
+                {{else}}
+                    {{#each tags}}
+                    <span>{{value}}</span>
+                    {{/each}}
+                {{/isParticipant}}
+            {{else}}
+                {{#each tags}}
+                <span>{{value}}</span>
+                {{/each}}
+            {{/isAllowed}}
+        </td>
+    </script>
+}
+
+@section scripts {
+    <script src="~/Content/js/local/calendar.js"></script>
+}
+    <div class="introduction">
+        <p>
+            Welcome to the online ecclesial schedule.  Thank you for taking the time to volunteer.
+        </p>
+        <p>
+            Please select the tasks you are willing to volunteer for.  <strong>You can unselect any choice you make, by clicking it again</strong>.  All available tasks will be displayed as a button you can click.
+            You may only select approved tasks. If you believe you should be able to select a task, but are unable, please contact <a href="mailto:jeremymfoster@hotmail.com">Bro. Jeremy Foster</a>.
+        </p>
+        <p>
+            By default you may have been voluntered to perform a task.  If you are unable to perform it, please unselect it.
+        </p>
+        <p>
+            <em>
+                "Speak unto the children of Israel, that they bring me an offering: of every man that giveth it willingly with his heart ye shall take my offering." (Exo 25:2 KJV)
+            </em>
+        </p>
+        @*<p>
+            If a task is already assigned, you may make a request to switch with whomever currently has it selected.  Click the task and complete the request form.
+        </p>*@
+    </div>
+<div class="clear"></div>
+<div id="tab-schedule">
+    <ul>
+        <li><a href="#tab1">Sunday</a></li>
+        <li><a href="#tab2">Bible Class</a></li>
+        <li><a href="#tab3">Hall Cleaning</a></li>
+        <li>
+            <div>
+                <a href="/home/thanks" id="accept">
+                    <span class="ui-icon ui-icon-mail-closed">
+                    </span>
+                    Accept
+                </a>
+            </div>
+        </li>
+    </ul>
+    <div id="tab1">
+        <div id="sundaySchedule">
+            Loading...
+        </div>
+    </div>
+    <div id="tab2">
+        <div id="bibleClassSchedule">
+            Loading...
+        </div>
+    </div>
+    <div id="tab3">
+        <div id="cleaningSchedule">
+            Loading...
+        </div>
+    </div>
+</div>
+<div class="clear"></div>

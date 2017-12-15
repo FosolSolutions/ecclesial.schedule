@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/js/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/js/priority-navigation/dist/priority-nav-core.css" rel="stylesheet" />
+    <link href="~/Content/css/local/site.css" rel="stylesheet" />
+    @RenderSection("head", false)
+</head>
+<body>
+    <div id="header">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="user-profile">
+                <span>Hi</span><h2>@User.Identity.Name</h2>
+                <div>
+                    If this is incorrect please signoff and contact <a href="mailto:jeremymfoster@hotmail.com">Jeremy Foster</a>.
+                </div>
+                <div class="right-menu"><a href="/auth/signoff">Signoff</a></div>
+            </div>
+            <div class="clear"></div>
+        }
+    </div>
+
+    <div id="body">
+        @RenderBody()
+    </div>
+
+    <div id="footer">
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/Content/js/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/Content/js/handlebars/handlebars-v4.0.11.js"></script>
+    <script src="~/Content/js/priority-navigation/dist/priority-nav.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bluebird/latest/bluebird.min.js" ></script>
+    <script src="~/Content/js/local/site.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

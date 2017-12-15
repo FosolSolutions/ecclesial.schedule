@@ -1,0 +1,55 @@
+﻿@model IList<Ecclesial.Calendar.DAL.Participant>
+@{
+    ViewData["Title"] = "Impersonate";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+@section scripts {
+    <script type="text/javascript">
+        function copyToClipboard(text) {
+            window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+        }
+        String.prototype.replaceAll = function (search, replacement) {
+            var target = this;
+            return target.replace(new RegExp(search, 'g'), replacement);
+        };
+        $("div[name=\'copy'\]").on("click", function (e) {
+            const text = $(this).next().text();
+            copyToClipboard(text.trim().replaceAll('                ', ''));
+        });
+        $("#participants").menu();
+    </script>
+}
+
+<h2>Impersonate</h2>
+
+<ul id="participants" class="participant-list">
+    @foreach (var participant in Model)
+    {
+    <li>
+        <div>
+            <div>
+                <div>
+                    <a href="/auth/impersonate/@participant.Key">@participant.FirstName @participant.LastName</a>
+                </div>
+                <div>
+                    <input type="checkbox" class="ui-checkboxradio-checked" />
+                </div>
+            </div>
+            <div name="copy" class="ui-icon ui-icon-mail-open">
+            </div>
+            <div class="participant-email-invitation">
+                Victoria Ecclesial 2018 Schedule
+                @participant.Email
+                Hello @participant.FirstName,
+                <p>
+                    Please use the following link to access the Victoria Ecclesial 2018 Schedule - http://ecclesialcalendar.azurewebsites.net/auth/validate/user/@participant.Key
+                    This link is specifically generated for you, please do not forward it to someone else.
+                </p>
+                Thanks, Jeremy
+            </div>
+        </div>
+        <div class="clear"></div>
+    </li>
+    }
+</ul>

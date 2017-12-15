@@ -1,6 +1,7 @@
-!.*
-!bin
-!obj
-!connectionstrings.*
-!*.user
-!Properties
+.*
+bin
+obj
+connectionstrings.*
+*.user
+Properties
+

@@ -1,0 +1,67 @@
+﻿.schedule {
+}
+    .schedule table {
+        border-collapse: collapse;
+        vertical-align: top;
+        border: 1px solid grey;
+        white-space: nowrap;
+    }
+
+    .schedule td {
+        padding: 1px 2px 1px 2px;
+        border-collapse: collapse;
+        vertical-align: top;
+        border: 1px solid grey;
+        white-space: nowrap;
+    }
+
+    .schedule td div {
+        padding: 1px 2px 1px 2px;
+        border-collapse: collapse;
+        vertical-align: top;
+        white-space: nowrap;
+    }
+
+    .schedule thead tr td {
+        vertical-align: top;
+        border-left: 1px solid grey;
+        border-bottom: 1px solid black;
+        white-space: nowrap;
+    }
+
+    .schedule td th {
+        vertical-align: top;
+        white-space: nowrap;
+    }
+
+.schedule-month {
+    vertical-align: top;
+    background-color: #e1e7e9;
+    border-bottom: 1px solid grey;
+}
+
+    .schedule-month div {
+        text-orientation: sideways;
+        writing-mode: vertical-rl;
+    }
+
+.row-odd {
+    background-color: #e1e7e9;
+}
+
+.participant {
+    float: left;
+}
+
+.participant-list li div div div {
+    float: left;
+    width: 200px;
+}
+
+.participant-email-invitation {
+    overflow: hidden;
+    text-overflow: clip;
+    display: none;
+    height: 1px;
+    width: 1px;
+}

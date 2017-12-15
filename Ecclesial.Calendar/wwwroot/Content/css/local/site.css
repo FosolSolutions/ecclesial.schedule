@@ -1,0 +1,53 @@
+﻿body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.clear {
+    clear: both;
+}
+
+.ui-text {
+    -webkit-user-select: unset;
+    -moz-user-select: unset;
+    -ms-user-select: unset;
+    user-select: unset;
+}
+
+.user-profile h2 {
+    float: left;
+    margin: 0 0 0 5px;
+}
+
+.user-profile span {
+    float: left;
+}
+
+.user-profile > div:first-of-type {
+    padding-left: 20px;
+    margin-left: 20px;
+    float: left;
+    font-size: smaller;
+}
+
+.right-menu {
+    float: right;
+    margin-right: 20px;
+}
+
+
+/* Participant */
+.participant div:first-child > span:nth-child(1), .participant div:first-child > span:nth-child(2) {
+    font-weight: bold;
+}
+
+.participant span:nth-child(3) {
+    font-weight: 200;
+}
+
+#participants div.row:nth-child(2n+1) {
+    background-color: #EEEEEE;
+}
+
+input[type=text] {
+    text-align: left;
+}

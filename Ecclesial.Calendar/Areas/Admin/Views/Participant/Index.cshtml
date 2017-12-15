@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+<h2>Participant Administration</h2>
+
+@section scripts {
+
+    <script id="t-participants" type="text/x-handlebars-template">
+        {{#each .}}
+        <div class="row participant" data-id="{{id}}" data-rv="{{rowVersion}}">
+            <div>
+                <span>{{firstName}}</span>
+                <span>{{lastName}}</span>
+                <span>{{email}}</span>
+                <div><span>Key:</span><span>{{key}}</span></div>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+
+    <script type="text/javascript">
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        const t_participants = Handlebars.compile(document.getElementById('t-participants').innerHTML);
+
+        var page = getParameterByName("page");
+        if ('undefined' === typeof page || null == page || page < 0) {
+            page = 0;
+        }
+
+        $(document).ready(function () {
+            getParticipants(page);
+
+            $('#add').on('click', function (e) {
+                window.location = '/admin/participant/add';
+            });
+
+            $('#previous').on('click', function (e) {
+                getParticipants(page - 1);
+            });
+
+            $('#next').on('click', function (e) {
+                getParticipants(page + 1);
+            });
+        });
+
+        const drawParticipants = function (data) {
+            const $div = $('#participants');
+            $div.html(t_participants(data));
+
+
+            $div.find('div.participant').on('click', function (e) {
+                const id = $(this).data('id');
+                window.location = '/admin/participant/' + id;
+            });
+        }
+
+        const getParticipants = function (p) {
+            $.ajax('/data/participants?page=' + p, {
+                method: 'GET',
+                dataType: 'json',
+                success: function (data, status, xhr) {
+                    page = p;
+                    drawParticipants(data);
+                }
+            });
+        }
+
+        Handlebars.registerHelper('debug', function (value) {
+            debugger; // eslint-disable-line
+        });
+    </script>
+}
+
+    <nav>
+        <div id="add" class="ui-button">
+            <span>Add</span>
+        </div>
+        <div id="previous" class="ui-button">
+            <span>Previous</span>
+        </div>
+        <div id="next" class="ui-button">
+            <span>Next</span>
+        </div>
+    </nav>
+
+<div id="participants">
+
+</div>

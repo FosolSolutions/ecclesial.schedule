@@ -1,0 +1,187 @@
+﻿@model Ecclesial.Calendar.DAL.Participant
+@{
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+@section scripts {
+
+    <script id="t-participant" type="text/x-handlebars-template">
+    </script>
+
+    <script type="text/javascript">
+
+        const t_participant = Handlebars.compile(document.getElementById('t-participant').innerHTML);
+
+        const getParticipant = function () {
+            return {
+                id: $('input[name=\'id\']').val(),
+                firstName: $('input[name=\'firstName\']').val(),
+                lastName: $('input[name=\'lastName\']').val(),
+                email: $('input[name=\'email\']').val(),
+                gender: $('select[name=\'gender\']').val(),
+                key: $('input[name=\'key\']').val(),
+                phoneNumber: $('input[name=\'phoneNumber\']').val(),
+                rowVersion: $('input[name=\'rowVersion\']').val()
+            }
+        }
+
+        $(document).ready(function () {
+            const $frm = $('#participant').find('form');
+
+            $('#save').on('click', function (e) {
+                const data = getParticipant();
+                $.ajax('/data/participant', {
+                    type: data.id === '0' ? 'POST' : 'PUT',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data),
+                    success: function (data, status, xhr) {
+                        location.reload();
+                    }
+                });
+            });
+
+            $('#delete').on('click', function (e) {
+                const data = getParticipant();
+                $.ajax('/data/participant', {
+                    type: 'DELETE',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data),
+                    success: function (data, status, xhr) {
+                        location.reload();
+                    }
+                });
+            });
+
+            $('#add-attribute').on('click', function (e) {
+                const id = $('input[name=\'id\']').val();
+                const key = $('#attribute-key').val();
+                const value = $('#attribute-value').val();
+                $.ajax('/data/participant/attribute', {
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({
+                        participant: { id: id },
+                        key: key,
+                        value: value
+                    }),
+                    success: function (data, status, xhr) {
+                        location.reload();
+                    }
+                });
+            });
+
+            $('div[name=\'delete-attribute\']').on('click', function (e) {
+                const $delete = $(this);
+                const id = $('input[name=\'id\']').val();
+                const key = $delete.data('key');
+                const value = $delete.data('value');
+                const rowVersion = $delete.data('rv');
+                $.ajax('/data/participant/attribute', {
+                    type: 'DELETE',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({
+                        participant: { id: id },
+                        key: key,
+                        value: value,
+                        rowVersion: rowVersion
+                    }),
+                    success: function (data, status, xhr) {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<h2>Participant</h2>
+
+<div id="participant">
+    <form enctype="application/x-www-form-urlencoded">
+        <nav>
+            <div id="save" class="ui-button">
+                <span>Save</span>
+            </div>
+            <div id="delete" class="ui-button">
+                <span>Delete</span>
+            </div>
+        </nav>
+        <hr />
+        <input name="id" type="hidden" value="@Model.Id" />
+        <input name="rowVersion" type="hidden" value="@if (Model.RowVersion != null) { @Convert.ToBase64String(Model.RowVersion) } " />
+        <div>
+            <div>
+                <span>First Name:</span>
+                <span>
+                    <input name="firstName" type="text" class="ui-button ui-text" value="@Model.FirstName" />
+                </span>
+                <span>Last Name:</span>
+                <span>
+                    <input name="lastName" type="text" class="ui-button ui-text" value="@Model.LastName" />
+                </span>
+                <span>Gender:</span>
+                <span>
+                    <select name="gender" class="ui-button">
+                        <option value="0" @if (@Model.Gender == Ecclesial.Calendar.DAL.Gender.Male) { @Html.Raw("selected") }>Male</option>
+                        <option value="1"@if (@Model.Gender == Ecclesial.Calendar.DAL.Gender.Female) { @Html.Raw("selected") }>Female</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div>
+            <span>Email:</span>
+            <span>
+                <input name="email" type="text" class="ui-button ui-text" value="@Model.Email" />
+            </span>
+            <span>Phone:</span>
+            <span>
+                <input name="phoneNumber" type="text" class="ui-button ui-text" value="@Model.PhoneNumber" />
+            </span>
+        </div>
+        <div>
+            <span>Key:</span>
+            <span>
+                <input name="key" type="text" class="ui-button ui-text" value="@Model.Key" disabled />
+            </span>
+        </div>
+        <hr />
+        <div>
+            <div>
+                <span>Key:</span>
+                <span>
+                    <input id="attribute-key" type="text" class="ui-button ui-text" />
+                </span>
+                <span>Value:</span>
+                <span>
+                    <input id="attribute-value" type="text" class="ui-button ui-text" />
+                </span>
+                <div id="add-attribute" class="ui-button">
+                    <div class="ui-icon ui-icon-check">
+                    </div>
+                </div>
+            </div>
+            @foreach (var attribute in Model.Attributes)
+            {
+            <div>
+                <input name="rowVersion" type="hidden" value="@attribute.RowVersion" />
+                <span>Key:</span>
+                <span>
+                    <input name="attribute-key" type="text" class="ui-button ui-text" value="@attribute.Key" disabled />
+                </span>
+                <span>Value:</span>
+                <span>
+                    <input name="attribute-value" type="text" class="ui-button ui-text" value="@attribute.Value" disabled />
+                </span>
+                <div name="delete-attribute" class="ui-button" data-key="@attribute.Key" data-value="@attribute.Value" data-rv="@Convert.ToBase64String(attribute.RowVersion)">
+                    <div class="ui-icon ui-icon-close">
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </form>
+</div>
