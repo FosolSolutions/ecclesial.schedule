@@ -24,7 +24,7 @@ namespace Ecclesial.Calendar
                 {
                     var env = builderContext.HostingEnvironment;
                     config.AddJsonFile("connectionstrings.json", optional: false, reloadOnChange: true)
-                        .AddJsonFile($"connectionstrings.{env.EnvironmentName}.json", optional: false, reloadOnChange: true);
+                        .AddJsonFile($"connectionstrings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
                 })
                 .UseStartup<Startup>()
                 .Build();
