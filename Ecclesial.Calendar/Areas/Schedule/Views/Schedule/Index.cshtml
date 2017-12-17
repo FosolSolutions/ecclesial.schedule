@@ -10,7 +10,7 @@
         <div class="schedule">
             <table>
                 <thead>
-                    <tr>
+                    <tr class="row-odd">
                         <td colspan="2">Date</td>
                         {{#each months.0.weeks.0.events}}
                         {{#each tasks}}
@@ -29,7 +29,7 @@
                 <tbody>
                     {{#each months}}
                         {{#each weeks}}
-                        <tr class="schedule-week {{#odd @@index}}row-odd{{else}}row-even{{/odd}}">
+                        <tr class="schedule-week {{#odd @@../index}}row-odd{{else}}row-even{{/odd}}">
                             {{#equals @@index 0}}
                             <td rowspan="{{../weeks.length}}" class="schedule-month"><div>{{../name}}</div></td>
                             {{/equals}}

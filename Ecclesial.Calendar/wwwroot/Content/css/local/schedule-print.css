@@ -1,5 +1,40 @@
-﻿.schedule {
+﻿body * {
+    visibility: hidden;
 }
+
+#sundaySchedule, #sundaySchedule * {
+    visibility: visible;
+}
+
+#sundaySchedule {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#bibleClassSchedule, #bibleClassSchedule * {
+    visibility: visible;
+}
+
+#bibleClassSchedule {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#cleaningSchedule, #cleaningSchedule * {
+    visibility: visible;
+}
+
+#cleaningSchedule {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.schedule {
+}
+
     .schedule table {
         border-collapse: collapse;
         vertical-align: top;
@@ -15,12 +50,12 @@
         white-space: nowrap;
     }
 
-    .schedule td div {
-        padding: 1px 2px 1px 2px;
-        border-collapse: collapse;
-        vertical-align: top;
-        white-space: nowrap;
-    }
+        .schedule td div {
+            padding: 1px 2px 1px 2px;
+            border-collapse: collapse;
+            vertical-align: top;
+            white-space: nowrap;
+        }
 
     .schedule thead tr td {
         vertical-align: top;

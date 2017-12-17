@@ -1,0 +1,106 @@
+﻿@model Ecclesial.Calendar.DAL.Calendar
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@section head {
+    <link href="~/Content/css/local/schedule.css" rel="stylesheet" media="screen" />
+    <link href="~/Content/css/local/schedule-print.css" rel="stylesheet" media="print"/>
+    <script id="t-schedule" type="text/x-handlebars-template">
+        <div class="schedule">
+            <table>
+                <thead>
+                    <tr class="row-odd">
+                        <td colspan="2">Date</td>
+                        {{#each months.0.weeks.0.events}}
+                        {{#each tasks}}
+                        <td>{{name}}</td>
+                        {{#if tags}}
+                        <td>
+                            {{#each tags}}
+                            <span>{{id}}</span>
+                            {{/each}}
+                        </td>
+                        {{/if}}
+                        {{/each}}
+                        {{/each}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each months}}
+                    {{#each weeks}}
+                    <tr class="schedule-week {{#odd @@../index}}row-odd{{else}}row-even{{/odd}}">
+                        {{#equals @@index 0}}
+                        <td rowspan="{{../weeks.length}}" class="schedule-month"><div>{{../name}}</div></td>
+                        {{/equals}}
+                        <td>{{day}}</td>
+                        {{#each events}}
+                        {{#each tasks}}
+                        <td data-event-id="{{../id}}" data-task-id="{{id}}">
+                            {{#each participants}}
+                            <div class="participant">{{> participantName .}}</div>
+                            {{/each}}
+                        </td>
+                        {{#if tags}}
+                        {{> taskTags .}}
+                        {{/if}}
+                        {{/each}}
+                        {{/each}}
+                    </tr>
+                    {{/each}}
+                    {{/each}}
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </script>
+
+    <script id="t-task-tags" type="text/x-handlebars-template">
+        <td name="tags" data-task-id="{{id}}">
+            {{#each tags}}
+            <span>{{value}}</span>
+            {{/each}}
+        </td>
+    </script>
+}
+
+@section scripts {
+    <script src="~/Content/js/local/calendar.js"></script>
+}
+
+<div class="introduction">
+</div>
+<div class="clear"></div>
+<div id="tab-schedule">
+    <ul>
+        <li><a href="#tab1">Sunday</a></li>
+        <li><a href="#tab2">Bible Class</a></li>
+        <li><a href="#tab3">Hall Cleaning</a></li>
+        <li>
+            <div>
+                <a href="/home/thanks" id="accept">
+                    <span class="ui-icon ui-icon-mail-closed">
+                    </span>
+                    Accept
+                </a>
+            </div>
+        </li>
+    </ul>
+    <div id="tab1">
+        <div id="sundaySchedule">
+            Loading...
+        </div>
+    </div>
+    <div id="tab2">
+        <div id="bibleClassSchedule">
+            Loading...
+        </div>
+    </div>
+    <div id="tab3">
+        <div id="cleaningSchedule">
+            Loading...
+        </div>
+    </div>
+</div>
+<div class="clear"></div>

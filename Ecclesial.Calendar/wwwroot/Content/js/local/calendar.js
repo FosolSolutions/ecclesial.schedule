@@ -8,7 +8,7 @@ const t_task_tags = Handlebars.compile(document.getElementById('t-task-tags').in
 
 const formatParticipantName = function (participant) {
     if (participant && participant.firstName)
-        return participant.firstName.substring(0, 1) + ' ' + participant.lastName;
+        return participant.firstName.substring(0, 2) + ' ' + participant.lastName;
     return '';
 };
 
