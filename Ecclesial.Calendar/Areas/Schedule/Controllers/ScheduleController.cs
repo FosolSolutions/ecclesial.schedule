@@ -43,6 +43,17 @@ namespace Ecclesial.Calendar.Areas.Schedule.Controllers
 
             return View(calendar);
         }
+
+        [HttpGet("print/{id}")]
+        public IActionResult Print(int id)
+        {
+            var calendar = _context.Calendars.Find(id);
+
+            if (calendar == null)
+                return NoContent();
+
+            return View(calendar);
+        }
         #endregion
     }
 }

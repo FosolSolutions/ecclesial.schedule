@@ -53,14 +53,14 @@ namespace Ecclesial.Calendar
             });
 
             var cs = this.Configuration.GetConnectionString("Ecclesial.Calendar");
-            services.AddDataSource( options =>
-            {
-                options.Clear = false;
-                options.Create = false;
-                options.Initialize = false;
-                options.Seed = false;
-                options.ConnectionString = cs;
-            });
+            services.AddDataSource(options =>
+           {
+               options.Clear = false;
+               options.Create = false;
+               options.Initialize = false;
+               options.Seed = false;
+               options.ConnectionString = cs;
+           });
 
             //new DAL.DataSource(new DataSourceOptions() { Clear = false, Create = false, Initialize = true, Seed = true, ConnectionString = cs }).Initialize();
         }
