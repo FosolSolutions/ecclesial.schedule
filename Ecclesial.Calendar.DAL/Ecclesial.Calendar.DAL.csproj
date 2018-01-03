@@ -6,11 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Fosol.Core\Fosol.Core.csproj" />
-    <ProjectReference Include="..\Fosol.Data\Fosol.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
 
