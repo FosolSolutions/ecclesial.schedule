@@ -1,0 +1,6 @@
+[submodule "fosol.core"]
+	path = fosol.core
+	url = https://github.com/FosolSolutions/fosol.core.git
+[submodule "fosol.data"]
+	path = fosol.data
+	url = https://github.com/FosolSolutions/fosol.data.git
