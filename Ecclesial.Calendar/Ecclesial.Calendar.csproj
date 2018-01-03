@@ -25,6 +25,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ecclesial.Calendar.DAL\Ecclesial.Calendar.DAL.csproj" />
+    <ProjectReference Include="..\fosol.core\Fosol.Core.csproj" />
+    <ProjectReference Include="..\fosol.data\Fosol.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
