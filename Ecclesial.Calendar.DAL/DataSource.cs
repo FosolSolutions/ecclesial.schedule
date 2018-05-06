@@ -80,11 +80,11 @@ namespace Ecclesial.Calendar.DAL
                 new Tag("Topic") });
 
             // Insert Calendar.
-            var start = new DateTime(2018, 1, 1);
-            var end = new DateTime(2018, 6, 30).EndOfDay();
+            var start = new DateTime(2018, 7, 1);
+            var end = new DateTime(2018, 12, 31).EndOfDay();
             var calendar = new Calendar("Victoria Christadelphian Ecclesia", start, end)
             {
-                Description = $"Plan of Appointments - January to June 2018 - God Willing"
+                Description = $"Plan of Appointments - July to December 2018 - God Willing"
             };
             this.Calendars.Add(calendar);
 
@@ -226,12 +226,11 @@ namespace Ecclesial.Calendar.DAL
                 new Participant("Andrea Ceron", "NA", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
                 new Participant("Daniel Cover", "danielclover@shaw.ca", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Presider" })  { Gender = Gender.Male },
                 new Participant("Carita Clover", "danielclover@shaw.ca", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
-                new Participant("Hannah Clover", "hannahclover21@gmail.com", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
+                // new Participant("Hannah Clover", "hannahclover21@gmail.com", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
                 new Participant("Jack Clover", "jayclo@hotmail.com", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Speaker" }, new { Key = "Role", Value = "Presider" })  { Gender = Gender.Male },
                 new Participant("Valerie Clover", "NA", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
                 new Participant("Jeni Coupar", "NA", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
                 new Participant("Beth Dangerfield", "gdanger@shaw.ca", new { Key = "Role", Value = "Sister" }, new { Key = "Role", Value = "Pianist" })  { Gender = Gender.Female },
-                new Participant("Caitlyn Daniel", "NA", new { Key = "Role", Value = "Sister" }, new { Key = "Role", Value = "Pianist" })  { Gender = Gender.Female },
                 new Participant("Clive Daniel", "NA", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Speaker" }, new { Key = "Role", Value = "Presider" })  { Gender = Gender.Male },
                 new Participant("Jennifer Daniel", "jenniferdaniel@telus.net", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
                 new Participant("Eileen Daniel", "NA", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
@@ -245,7 +244,7 @@ namespace Ecclesial.Calendar.DAL
                 new Participant("Elizabeth Foster", "ejoyfoster@gmail.com", new { Key = "Role", Value = "Sister" }, new { Key = "Role", Value = "Pianist" })  { Gender = Gender.Female },
                 new Participant("Linda Gilmore", "linda.gilmour@telus.net", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
                 new Participant("Diana Gorman", "dianagorman@shaw.ca", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
-                new Participant("Alex Harper", "aharper10@hotmail.com", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Presider" }, new { Key = "Role", Value = "Doorkeeper" })  { Gender = Gender.Male },
+                // new Participant("Alex Harper", "aharper10@hotmail.com", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Presider" }, new { Key = "Role", Value = "Doorkeeper" })  { Gender = Gender.Male },
                 new Participant("Art Hibbs", "art.hibbs@gmail.com", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Speaker" }, new { Key = "Role", Value = "AB" }, new { Key = "Role", Value = "Presider" })  { Gender = Gender.Male },
                 new Participant("Linda Hibbs", "2hibbs@gmail.com", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
                 new Participant("Jeff Hibbs", "jeffvictoria09@gmail.com", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Speaker" }, new { Key = "Role", Value = "Pianist" }, new { Key = "Role", Value = "Presider" }, new { Key = "Role", Value = "Doorkeeper" })  { Gender = Gender.Male },
@@ -267,6 +266,8 @@ namespace Ecclesial.Calendar.DAL
                 new Participant("Mark Little", "zhq.6987@gmail.com", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Presider" }, new { Key = "Role", Value = "Doorkeeper" })  { Gender = Gender.Male },
                 new Participant("Zoe Little", "mwl@netzero.net", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
                 new Participant("Myra Lucke", "myralucke1@gmail.com", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
+                new Participant("Mark Macfarlane", "macfarlane.9@hotmail.com", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Presider" }, new { Key = "Role", Value = "Doorkeeper" }, new { Key = "Role", Value = "Speaker" })  { Gender = Gender.Male },
+                new Participant("Caitlyn Macfarlane", "NA", new { Key = "Role", Value = "Sister" }, new { Key = "Role", Value = "Pianist" })  { Gender = Gender.Female },
                 new Participant("Horace Macpherson", "smmacpherson4@shaw.ca", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Speaker" }, new { Key = "Role", Value = "Presider" })  { Gender = Gender.Male },
                 new Participant("Sylvia Macpherson", "smmacpherson4@shaw.ca", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
                 new Participant("Bertha McArthur", "NA", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
@@ -319,10 +320,9 @@ namespace Ecclesial.Calendar.DAL
                 new Participant("Sharon Wood", "arthurwood@outlook.com", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
                 new Participant("Joan Woodcock", "NA", new { Key = "Role", Value = "Sister" })  { Gender = Gender.Female },
                 new Participant("Stephen Higgs", "stevehiggs@live.ca", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Presider" }, new { Key = "Role", Value = "Doorkeeper" })  { Gender = Gender.Male },
-                new Participant("Linda Higgs", "lin.susan.lh@gmail.com", new { Key = "Role", Value = "Sister" })   { Gender = Gender.Female },
-                new Participant("Judy Hewer", "judyhewer@hotmail.ca", new { Key = "Role", Value = "Sister" })   { Gender = Gender.Female },
-                new Participant("Sandi Coleswebb", "s.coleswebb@gmail.com", new { Key = "Role", Value = "Sister" })   { Gender = Gender.Female },
-                new Participant("Mark Macfarlane", "macfarlane.9@hotmail.com", new { Key = "Role", Value = "Brother" }, new { Key = "Role", Value = "Presider" }, new { Key = "Role", Value = "Doorkeeper" }, new { Key = "Role", Value = "Speaker" })  { Gender = Gender.Male }
+                new Participant("Linda Higgs", "lin.susan.lh@gmail.com", new { Key = "Role", Value = "Sister" }) { Gender = Gender.Female },
+                new Participant("Judy Hewer", "judyhewer@hotmail.ca", new { Key = "Role", Value = "Sister" }) { Gender = Gender.Female },
+                new Participant("Sandi Coleswebb", "s.coleswebb@gmail.com", new { Key = "Role", Value = "Sister" }) { Gender = Gender.Female }
             });
 
             foreach (var participant in this.Participants)

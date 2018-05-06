@@ -30,7 +30,8 @@ namespace Ecclesial.Calendar.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var calendars = _context.Calendars.All();
+            return View(calendars);
         }
 
         [HttpGet("home/thanks")]

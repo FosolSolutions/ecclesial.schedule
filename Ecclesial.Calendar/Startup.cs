@@ -55,7 +55,7 @@ namespace Ecclesial.Calendar
                options.ConnectionString = cs;
            });
 
-            //new DAL.DataSource(new DataSourceOptions() { Clear = false, Create = false, Initialize = true, Seed = true, ConnectionString = cs }).Initialize();
+            // new DAL.DataSource(new DataSourceOptions() { Clear = true, Create = false, Initialize = true, Seed = true, ConnectionString = cs }).Initialize();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

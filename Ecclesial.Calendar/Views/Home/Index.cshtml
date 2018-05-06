@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Ecclesial.Calendar.DAL.Calendar>
+@{
     ViewBag.Title = "Victoria Christadelpian Ecclesial Schedule";
 }
 
@@ -21,6 +22,9 @@
 
 <nav>
     <ul>
-        <li><a href="/schedule/1">Victoria Christalephian Ecclesial Schedule 2018 - January to June</a></li>
+        @foreach(var calendar in Model)
+        {
+            <li><a href="/schedule/@calendar.Id">@calendar.Description</a></li>
+        }
     </ul>
 </nav>
