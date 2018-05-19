@@ -67,14 +67,14 @@ namespace Ecclesial.Calendar.Controllers
             return RedirectToAction("ValidateUser", new { key = participant.Key });
         }
 
-        [HttpGet("impersonate")]
+        [HttpGet("impersonate"), Authorize]
         public IActionResult Impersonate()
         {
             var participants = _context.Participants.All();
             return View(participants);
         }
 
-        [HttpGet("impersonate/{key}")]
+        [HttpGet("impersonate/{key}"), Authorize]
         public async Task<IActionResult> Impersonate(Guid key)
         {
             var userId = int.Parse(User.GetNameIdentifier().Value);

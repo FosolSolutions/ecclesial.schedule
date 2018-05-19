@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Ecclesial.Calendar.DAL;
 using Ecclesial.Calendar.Helpers;
+using Ecclesial.Calendar.Helpers.Mail;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -21,12 +22,14 @@ namespace Ecclesial.Calendar.Areas.Admin.Controllers
     {
         #region Variables
         private readonly DataSource _context;
+        private readonly MailClient _mailClient;
         #endregion
 
         #region Constructors
-        public ParticipantController(DataSource context)
+        public ParticipantController(DataSource context, MailClient mailClient)
         {
             _context = context;
+            _mailClient = mailClient;
         }
         #endregion
 
@@ -53,6 +56,43 @@ namespace Ecclesial.Calendar.Areas.Admin.Controllers
         public IActionResult AddParticipant()
         {
             return View("Participant", new Participant());
+        }
+
+        [HttpGet("email/all/{scheduleId}")]
+        public IActionResult EmailAllParticipants(int scheduleId)
+        {
+            var participants = _context.Participants.All();
+            var errors = new List<Exception>();
+
+            foreach ( var participant in participants)
+            {
+                if (!String.IsNullOrWhiteSpace(participant.Email))
+                {
+                    var t = Task.Run(async delegate
+                    {
+                        await Task.Delay(1000);
+
+                        try
+                        {
+                            _mailClient.Send(participant);
+                        }
+                        catch (Exception ex)
+                        {
+                            errors.Add(new Exception($"Mail failed for {participant.LastName}, {participant.FirstName}", ex));
+                        }
+                    });
+
+                    t.Wait();
+                }
+            }
+
+            if (errors.Count() == 0)
+            {
+                return new JsonResult(true);
+            }
+
+            return new JsonResult(errors.Select(e => new { e.Message, InnerException = e.InnerException.Message }));
+
         }
         #endregion
     }
